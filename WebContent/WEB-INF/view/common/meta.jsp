@@ -19,7 +19,6 @@
 <%--public css--%>
 <link rel="stylesheet" type="text/css" href="${basePath}library/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${basePath}library/layer/skin/layer.css">
-<link rel="stylesheet" type="text/css" href="${basePath}library/laypage/laypage.css">
 
 <%--public js--%>
 <script type="text/javascript" src="${basePath}library/jquery/jquery-1.12.4.min.js" ></script>
