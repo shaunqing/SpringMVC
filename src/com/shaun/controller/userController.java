@@ -8,11 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.shaun.entity.User;
 import com.shaun.service.UserService;
 
@@ -23,9 +25,11 @@ public class userController {
 	@Resource
 	private UserService userService;
 
+	private User user;
+
 	@RequestMapping("/showHello")
 	public String showHello(HttpServletRequest request, Model model) {
-		//ttt
+		// ttt
 		System.out.println("showHello");
 		int userId = Integer.parseInt(request.getParameter("id"));
 		model.addAttribute("userId", userId);
@@ -40,7 +44,7 @@ public class userController {
 	@RequestMapping("/showUsers")
 	public String showUsers() {
 		System.out.println("showUsers");
-		return "showUsers";
+		return "user/showUsers";
 	}
 
 	/**
@@ -81,19 +85,44 @@ public class userController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/showUser2")
-	public String showUser2(HttpServletRequest request, Model model) {
+	@RequestMapping("/showUser2/{id}")
+	public String showUser2(@PathVariable("id") Integer id, Model model) {
 		System.out.println("showUser2");
-		int userId = Integer.parseInt(request.getParameter("id"));
-		User user = this.userService.getUserById(userId);
+		User user = this.userService.getUserById(id);
 		model.addAttribute("user", user);
-		return "showUser"; // 返回页面
+		return "user/showUser"; // 返回页面
 	}
-
+	
+	@ResponseBody
+	@RequestMapping("/showUser3/{id}")
+	public String showUser3(@PathVariable("id") Integer id, Model model) {
+		System.out.println("showUser3");
+		User user = this.userService.getUserById(id);
+		model.addAttribute(user);
+		return "user/showUser";
+	}
+	
+	@RequestMapping("/updateUser")
+	public String updateUser(String dataJson) {
+		System.out.println("updateUser");
+		User user = JSON.parseObject(dataJson, User.class);
+		System.out.println(user.getUsername());
+		return null;
+	}
+	
 	@RequestMapping("/deleteUser")
 	public String deleteUser() {
 		System.out.println("deleteUser");
 		userService.deleteUser(2);
 		return "showUsers";
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }
