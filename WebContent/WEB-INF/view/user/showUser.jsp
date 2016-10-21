@@ -14,26 +14,26 @@
 		<div class="row">
 			<div class="col-md-6">
 				<form class="form-horizontal" id="updateForm">
-				<input type="hidden"  name="user.id"
+				<input type="hidden"  name="id"
 								id="id" value="${user.id}">
 					<div class="form-group">
 						<label class="col-sm-2 control-label">username</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="user.username"
+							<input type="text" class="form-control" name="username"
 								id="username" value="${user.username}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">password</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="user.password"
+							<input type="text" class="form-control" name="password"
 								id="password" value="${user.password}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">age</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="user.age" id="age"
+							<input type="text" class="form-control" name="age" id="age"
 								value="${user.age}">
 						</div>
 					</div>

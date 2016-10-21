@@ -102,12 +102,14 @@ public class userController {
 		return "user/showUser";
 	}
 	
+	@ResponseBody
 	@RequestMapping("/updateUser")
 	public String updateUser(String dataJson) {
 		System.out.println("updateUser");
+		System.out.println(dataJson);
 		User user = JSON.parseObject(dataJson, User.class);
 		System.out.println(user.getUsername());
-		return null;
+		return "123123";
 	}
 	
 	@RequestMapping("/deleteUser")
@@ -125,4 +127,14 @@ public class userController {
 		this.user = user;
 	}
 
+	public static void main(String[] args) {
+		User user = new User();
+		user.setId(1);
+		user.setAge(123);
+		user.setPassword("123123");
+		user.setUsername("123123");
+		
+		String str = JSON.toJSONString(user);
+		System.out.println(str);
+	}
 }

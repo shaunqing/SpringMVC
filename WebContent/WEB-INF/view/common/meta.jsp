@@ -25,3 +25,4 @@
 <script type="text/javascript" src="${basePath}library/bootstrap/js/bootstrap.min.js" ></script>
 <script type="text/javascript" src="${basePath}library/layer/layer.js" ></script>
 <script type="text/javascript" src="${basePath}library/laypage/laypage.js" ></script>
+<script type="text/javascript" src="${basePath}library/utils/serializeUtil.js" ></script>

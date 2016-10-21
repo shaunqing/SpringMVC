@@ -1,16 +1,18 @@
 $(document).ready(function() {
 	initBtn();
+
 });
 
 function initBtn() {
 	$("#updateBtn").click(function() {
-		var param = $("#updateForm").serialize();
+		// 该方法已写在serializeUtil.js中
+		var jsonStr = JSON.stringify($('#updateForm').serializeObject());
 		$.ajax({
 			type : "POST",
 			url : 'test/updateUser',
 			dataType : 'json',
 			data : {
-				dataJson : $("#updateForm").serialize()
+				dataJson : jsonStr
 			},
 			success : function() {
 				alert("ok");
