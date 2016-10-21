@@ -25,6 +25,7 @@ public class userController {
 
 	@RequestMapping("/showHello")
 	public String showHello(HttpServletRequest request, Model model) {
+		//ttt
 		System.out.println("showHello");
 		int userId = Integer.parseInt(request.getParameter("id"));
 		model.addAttribute("userId", userId);
