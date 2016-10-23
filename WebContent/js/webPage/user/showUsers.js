@@ -1,16 +1,18 @@
 $(document).ready(function() {
+	initJqPaginator();
 	searchReport(1);
-
+	
 });
-
-
 
 function searchReport(page) {
 	$("#list tr").remove();
 	$.ajax({
-		url : "test/showListByAjax",
-		success : function(msg) {
-			$.each(msg, function(i, n) {
+		url : "test/showPagingUsers/" + page,
+		success : function(pageModel) {
+			//总页数
+			var totalPages = pageModel.totalPages;
+			var datas = pageModel.pageList;
+			$.each(datas, function(i, n) {
 				var trHTML = "<tr>";
 				trHTML += "<td>" + n.id + "</td>";
 				trHTML += "<td>" + n.username + "</td>";
@@ -20,6 +22,10 @@ function searchReport(page) {
 						+ ")\" href=\"javascript:void(0)\">修改</a></td>";
 				trHTML += "</tr>";
 				$("#list").append(trHTML);
+			});
+			$('#pagination').jqPaginator('option', {
+				totalPages: totalPages,
+				currentPage: page
 			});
 		},
 		error : function(result) {

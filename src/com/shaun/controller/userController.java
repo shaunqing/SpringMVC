@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.shaun.entity.User;
 import com.shaun.service.UserService;
+import com.shaun.util.PageModel;
 
 @Controller
 @RequestMapping("/test")
@@ -24,17 +25,6 @@ public class userController {
 
 	@Resource
 	private UserService userService;
-
-	private User user;
-
-	@RequestMapping("/showHello")
-	public String showHello(HttpServletRequest request, Model model) {
-		// ttt
-		System.out.println("showHello");
-		int userId = Integer.parseInt(request.getParameter("id"));
-		model.addAttribute("userId", userId);
-		return "hello";
-	}
 
 	/**
 	 * 跳转到WEB-INF/view/showUsers.jsp
@@ -59,6 +49,14 @@ public class userController {
 		System.out.println("showListByAjax");
 		List<User> users = userService.getAllUser();
 		return users;
+	}
+
+	@ResponseBody
+	@RequestMapping("/showPagingUsers/{pageNo}")
+	public PageModel<User> showAllPaging(@PathVariable("pageNo") int pageNo) {
+		System.out.println("showAllPaging");
+		PageModel<User> pageUsers = userService.getAll(pageNo);
+		return pageUsers;
 	}
 
 	/**
@@ -92,39 +90,22 @@ public class userController {
 		model.addAttribute("user", user);
 		return "user/showUser"; // 返回页面
 	}
-	
-	@ResponseBody
-	@RequestMapping("/showUser3/{id}")
-	public String showUser3(@PathVariable("id") Integer id, Model model) {
-		System.out.println("showUser3");
-		User user = this.userService.getUserById(id);
-		model.addAttribute(user);
-		return "user/showUser";
-	}
-	
+
 	@ResponseBody
 	@RequestMapping("/updateUser")
 	public String updateUser(String dataJson) {
 		System.out.println("updateUser");
 		System.out.println(dataJson);
 		User user = JSON.parseObject(dataJson, User.class);
-		System.out.println(user.getUsername());
-		return "123123";
+		userService.updateUser(user);
+		return "SUCCESS";
 	}
-	
+
 	@RequestMapping("/deleteUser")
 	public String deleteUser() {
 		System.out.println("deleteUser");
 		userService.deleteUser(2);
 		return "showUsers";
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public static void main(String[] args) {
@@ -133,7 +114,7 @@ public class userController {
 		user.setAge(123);
 		user.setPassword("123123");
 		user.setUsername("123123");
-		
+
 		String str = JSON.toJSONString(user);
 		System.out.println(str);
 	}

@@ -11,6 +11,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="password" column="password" />
 	</resultMap>
 
+	<select id="getAllPaging" resultType="User">
+		select * from user limit
+		#{rowIndex} , #{rowNum}
+	</select>
+	
+	<select id="getAllCount" resultType="int">
+		select count(1) from user
+	</select>
+	
 	<select id="getById" parameterType="int" resultType="User">
 		select *
 		from user where id=#{value}
@@ -27,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="updateUser" parameterType="User">
 		update user set
-		username=#{username},userAge=#{userAge},userAddress=#{userAddress}
+		username=#{username},age=#{age},password=#{password}
 		where id=#{id}
 	</update>
 
@@ -35,5 +44,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from user where
 		id=#{id}
 	</delete>
+
 
 </mapper>
