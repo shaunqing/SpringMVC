@@ -6,6 +6,7 @@
 <!-- 用绝对路径后，在使用ajax时就要写Controller层的路径 -->
 <base href="<%=basePath%>" />
 <script type="text/javascript" src="${basePath}js/webPage/user/showUser.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 

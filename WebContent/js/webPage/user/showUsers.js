@@ -44,7 +44,13 @@ function show(id) {
 		shade : 0.8,
 		maxmin : false, // 开启最大化最小化按钮
 		area : [ '893px', '600px' ],
-		content : 'test/showUser2/' + id
+		content : 'test/showUser2/' + id,
+		end : function() {
+			console.log("123");
+			var pageing=$(".pagination .page.active a").html();
+			console.log(pageing);
+			searchReport(pageing);
+		}
 	});
 }
 
